@@ -36,15 +36,15 @@ const RegisterPage = () => {
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput placeholder='Enter e-mail' />
+              <LoginTextInput error={false} placeholder='Enter e-mail' />
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput placeholder='Enter password' />
+              <LoginTextInput error={false} placeholder='Enter password' />
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput placeholder='Re-Enter password' />
+              <LoginTextInput error={true} placeholder='Re-Enter password' />
             </div>
 
             <div className={styles.loginButton}>Register</div>
@@ -82,41 +82,6 @@ const RegisterPage = () => {
           <div className={styles.option}>Privacy and Cookies</div>
           <span>|</span>
           <div className={styles.text}>Megahyped ©️ 2024</div>
-        </div>
-      </div>
-
-      <div className={styles.rightContainer}>
-        <div className={styles.soundContainer}>
-          <div className={styles.sound} onClick={() => setAudio(!audio)}>
-          <Image className={styles.img} src={audio == false ? musicicon : audionotchecked} alt='Music' />
-          </div>
-        </div>
-
-        <div className={styles.rightSide}>
-          <div className={styles.boxContainer}>
-            <div className={styles.title}>Lorem ipsum dolor sit amet.</div>
-            <div className={styles.description}>
-              Lorem ipsum dolor sit amet. Sed atque libero ut sint dolorum eos
-              placeat voluptate qui fugiat ratione!
-            </div>
-            <div className={styles.comingSoon}>
-              <Image className={styles.img} src={comingsoonart} alt='Coming Soon...' fill={true} />
-            </div>
-
-            <div className={styles.description}>
-              Lorem ipsum dolor sit amet. Sed atque libero ut sint dolorum eos
-              placeat voluptate qui fugiat ratione! Eos harum libero sed fugiat
-              voluptatem ut eaque odit ut modi sint qui quisquam voluptatem et
-              labore debitis.
-            </div>
-            <div className={styles.button}>
-              <div className={styles.icon}>
-                <Image src={litepaper} alt='Litepaper' className={styles.img} />
-              </div>
-
-              <div className={styles.text}>Litepaper</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

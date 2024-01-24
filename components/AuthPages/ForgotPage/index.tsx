@@ -11,6 +11,8 @@ import twitter from '@/public/assets/twitter.svg'
 
 const ForgotPage = () => {
   const [resetState, setResetState] = useState(1)
+  const [emailConfirmation, setEmailConfirmation] = useState(false)
+  const [passConfirmation, setPassConfirmation] = useState(false)
 
   return (
     <div className={styles.container}>
@@ -29,11 +31,17 @@ const ForgotPage = () => {
               Enter your email so that we can send you an email with instructions to reset your password.
             </div>
 
+            {emailConfirmation &&
+              <div className={styles.emailConfirmation}>
+                Your e-mail has been sent.
+              </div>
+            }
+
             <div className={styles.emailInput}>
-              <LoginTextInput placeholder='Enter e-mail' />
+              <LoginTextInput error={false} placeholder='Enter e-mail' />
             </div>
 
-            <div onClick={() => setResetState(2)} className={styles.loginButton}>Send Confirmation</div>
+            <div onClick={() => {setTimeout( () => setResetState(2), 2000); setEmailConfirmation(true)}} className={styles.loginButton}>Send Confirmation</div>
 
             <div className={styles.createAccount}>
               <span onClick={() => window.open('/login', '_self')}>
@@ -52,18 +60,24 @@ const ForgotPage = () => {
             <div className={styles.title}>Forgot your Password?</div>
 
             <div className={styles.description}>
-              Enter your email so that we can send you an email with instructions to reset your password.
+              Enter a new password for your account.
+            </div>
+
+            {passConfirmation &&
+              <div className={styles.passConfirmation}>
+                Your password has been changed with success!
+              </div>
+            }
+
+            <div className={styles.emailInput}>
+              <LoginTextInput error={false} placeholder='Enter New Password' />
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput placeholder='Enter New Password' />
+              <LoginTextInput error={false} placeholder='Re-enter New Password' />
             </div>
 
-            <div className={styles.emailInput}>
-              <LoginTextInput placeholder='Re-enter New Password' />
-            </div>
-
-            <div onClick={() => window.open('/login', '_self')} className={styles.loginButton}>Reset Password</div>
+            <div onClick={() => {setPassConfirmation(true), setTimeout( () => window.open('/login', '_self'), 2000)}} className={styles.loginButton}>Reset Password</div>
 
             <div className={styles.createAccount}>
               <span onClick={() => window.open('/login', '_self')}>

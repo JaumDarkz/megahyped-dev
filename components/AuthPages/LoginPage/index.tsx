@@ -36,11 +36,11 @@ const LoginPage = () => {
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput placeholder='Enter e-mail' />
+              <LoginTextInput error={false} placeholder='Enter e-mail' />
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput placeholder='Enter password' />
+              <LoginTextInput error={true} placeholder='Enter password' />
             </div>
 
             <div className={styles.loginButton}>Login</div>
