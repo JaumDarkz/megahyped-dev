@@ -1,5 +1,5 @@
+import ForgotPage from '@/components/AuthPages/ForgotPage'
 import Head from 'next/head'
-
 
 export default function ForgotPass() {
   return (
@@ -11,7 +11,7 @@ export default function ForgotPass() {
         <link rel="icon" href="/vector.ico" />
       </Head>
 
-      
+      <ForgotPage />
     </>
   )
 }

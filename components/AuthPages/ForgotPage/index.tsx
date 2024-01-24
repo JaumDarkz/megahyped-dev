@@ -8,11 +8,9 @@ import styles from './styles.module.scss'
 import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
 import discord from '@/public/assets/discord.svg'
 import twitter from '@/public/assets/twitter.svg'
-import unchecked from '@/public/assets/checkboxnotchecked.svg'
 
 const ForgotPage = () => {
-  const [checkbox, setCheckbox] = useState(false)
-  const [audio, setAudio] = useState(false)
+  const [resetState, setResetState] = useState(1)
 
   return (
     <div className={styles.container}>
@@ -20,58 +18,61 @@ const ForgotPage = () => {
         <Image src={hyperlogo} alt='Logo' width={290} />
       </div>
 
-      <div className={styles.loginContainer}>
-        <div className={styles.detail}>Lorem ipsum dolor sit amet</div>
+      {resetState == 1 ?
+        <div className={styles.loginContainer}>
+          <div className={styles.detail}>Lorem ipsum dolor sit amet</div>
 
-        <div className={styles.loginBox}>
-          <div className={styles.title}>Login to account</div>
+          <div className={styles.loginBox}>
+            <div className={styles.title}>Forgot your Password?</div>
 
-          <div className={styles.description}>
-            Enter your credentials to access your account.
-          </div>
-
-          <div className={styles.emailInput}>
-            <LoginTextInput placeholder='Enter e-mail' />
-          </div>
-
-          <div className={styles.passwordInput}>
-            <LoginTextInput placeholder='Enter password' />
-          </div>
-
-          <div className={styles.loginButton}>Login</div>
-
-          <div className={styles.optionsContainer}>
-            <div className={styles.rememberMe}>
-              <div
-                className={styles.checkbox}
-                onClick={() => setCheckbox(!checkbox)}
-              >
-                {checkbox == false ? (
-                  <Image src={unchecked} alt='Checkbox' />
-                ) : null}
-              </div>
-
-              <div className={styles.text}>
-                Remember this machinhe for 30 days
-              </div>
+            <div className={styles.description}>
+              Enter your email so that we can send you an email with instructions to reset your password.
             </div>
 
-            <div
-              className={styles.forgot}
-              onClick={() => window.open('/forgot', '_self')}
-            >
-              Forgot?
+            <div className={styles.emailInput}>
+              <LoginTextInput placeholder='Enter e-mail' />
             </div>
-          </div>
 
-          <div className={styles.createAccount}>
-            Not a member?{' '}
-            <span onClick={() => window.open('/register', '_self')}>
-              Create Account
-            </span>
+            <div onClick={() => setResetState(2)} className={styles.loginButton}>Send Confirmation</div>
+
+            <div className={styles.createAccount}>
+              <span onClick={() => window.open('/login', '_self')}>
+                Back to Login Page
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+
+        :
+
+        <div className={styles.loginContainer}>
+          <div className={styles.detail}>Lorem ipsum dolor sit amet</div>
+
+          <div className={styles.loginBox}>
+            <div className={styles.title}>Forgot your Password?</div>
+
+            <div className={styles.description}>
+              Enter your email so that we can send you an email with instructions to reset your password.
+            </div>
+
+            <div className={styles.emailInput}>
+              <LoginTextInput placeholder='Enter New Password' />
+            </div>
+
+            <div className={styles.emailInput}>
+              <LoginTextInput placeholder='Re-enter New Password' />
+            </div>
+
+            <div onClick={() => window.open('/login', '_self')} className={styles.loginButton}>Reset Password</div>
+
+            <div className={styles.createAccount}>
+              <span onClick={() => window.open('/login', '_self')}>
+                Back to Login Page
+              </span>
+            </div>
+          </div>
+        </div>
+      }
 
       <div className={styles.socialContainer}>
         <div
