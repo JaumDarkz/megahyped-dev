@@ -7,16 +7,11 @@
   background-size: 100%;
   padding: 60px;
 
-  .sidebarContainer {
-    position: fixed;
-  }
-
   .stakeContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 50px;
-    margin-left: 390px;
 
     .header {
       width: 100%;
