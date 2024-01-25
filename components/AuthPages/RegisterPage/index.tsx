@@ -9,22 +9,26 @@ import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
 import discord from '@/public/assets/discord.svg'
 import twitter from '@/public/assets/twitter.svg'
 import musicicon from '@/public/assets/sound.svg'
-import comingsoonart from '@/public/assets/comingsoonart.svg'
-import litepaper from '@/public/assets/litepaper.svg'
-import unchecked from '@/public/assets/checkboxnotchecked.svg'
-import audionotchecked from '@/public/assets/checkboxchecked.svg'
+import muteicon from '@/public/assets/mute.svg'
 
 const RegisterPage = () => {
-  const [checkbox, setCheckbox] = useState(false)
   const [audio, setAudio] = useState(false)
 
   return (
     <div className={styles.container}>
-      <div className={styles.leftSide}>
+      <div className={styles.header}>
+        <div />
+
         <div className={styles.logo}>
           <Image src={hyperlogo} alt='Logo' width={290} />
         </div>
 
+        <div className={styles.sound} onClick={() => setAudio(!audio)}>
+          <Image className={styles.img} src={audio == false ? musicicon : muteicon} alt='Sound' />
+        </div>
+      </div>
+
+      <div className={styles.leftSide}>
         <div className={styles.loginContainer}>
           <div className={styles.detail}>Lorem ipsum dolor sit amet</div>
 
@@ -33,6 +37,10 @@ const RegisterPage = () => {
 
             <div className={styles.description}>
               Enter your credentials to register your account.
+            </div>
+
+            <div className={styles.userInput}>
+              <LoginTextInput error={false} placeholder='Enter username ' />
             </div>
 
             <div className={styles.emailInput}>
@@ -55,26 +63,6 @@ const RegisterPage = () => {
                 Login to Account
               </span>
             </div>
-          </div>
-        </div>
-
-        <div className={styles.socialContainer}>
-          <div
-            className={styles.social}
-            onClick={() =>
-              window.open('https://discord.com/invite/megahyped', '_self')
-            }
-          >
-            <Image src={discord} alt='Discord' className={styles.img} />
-          </div>
-
-          <div
-            className={styles.social}
-            onClick={() =>
-              window.open('https://twitter.com/MegaHypedDAO', '_self')
-            }
-          >
-            <Image src={twitter} alt='Twitter' className={styles.img} />
           </div>
         </div>
 

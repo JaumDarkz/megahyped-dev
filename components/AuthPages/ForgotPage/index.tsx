@@ -8,21 +8,27 @@ import styles from './styles.module.scss'
 import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
 import discord from '@/public/assets/discord.svg'
 import twitter from '@/public/assets/twitter.svg'
+import musicicon from '@/public/assets/sound.svg'
+import muteicon from '@/public/assets/mute.svg'
 
 const ForgotPage = () => {
-  const [resetState, setResetState] = useState(1)
+  const [resetState, setResetState] = useState(3)
   const [emailConfirmation, setEmailConfirmation] = useState(false)
   const [passConfirmation, setPassConfirmation] = useState(false)
+  const [audio, setAudio] = useState(false)
 
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
-        <Image src={hyperlogo} alt='Logo' width={290} />
+      <div className={styles.header}>
+        <Image src={hyperlogo} alt='Logo' width={190} />
+
+        <div className={styles.sound} onClick={() => setAudio(!audio)}>
+          <Image className={styles.img} src={audio == false ? musicicon : muteicon} alt='Sound' />
+        </div>
       </div>
 
       {resetState == 1 ?
         <div className={styles.loginContainer}>
-          <div className={styles.detail}>Lorem ipsum dolor sit amet</div>
 
           <div className={styles.loginBox}>
             <div className={styles.title}>Forgot your Password?</div>
@@ -51,16 +57,33 @@ const ForgotPage = () => {
           </div>
         </div>
 
-        :
+        : resetState == 2 ?
 
         <div className={styles.loginContainer}>
-          <div className={styles.detail}>Lorem ipsum dolor sit amet</div>
-
           <div className={styles.loginBox}>
-            <div className={styles.title}>Forgot your Password?</div>
+            <div className={styles.title}>Check e-mail!</div>
 
             <div className={styles.description}>
-              Enter a new password for your account.
+              We have sent the reset email to <br />
+              <span style={{color: '#FF2673'}}>{'youremailaccount@gmail.com'}</span>
+            </div>
+
+            <div className={styles.createAccount}>
+              <span onClick={() => window.open('/login', '_self')}>
+                Back to Login Page
+              </span>
+            </div>
+          </div>
+        </div>
+
+        : resetState == 3 ? 
+
+        <div className={styles.loginContainer}>
+          <div className={styles.loginBox}>
+            <div className={styles.title}>Choose new password!</div>
+
+            <div className={styles.description}>
+              Almost done. Enter your new password and you&apos;re all set.
             </div>
 
             {passConfirmation &&
@@ -77,7 +100,25 @@ const ForgotPage = () => {
               <LoginTextInput error={false} placeholder='Re-enter New Password' />
             </div>
 
-            <div onClick={() => {setPassConfirmation(true), setTimeout( () => window.open('/login', '_self'), 2000)}} className={styles.loginButton}>Reset Password</div>
+            <div onClick={() => {setPassConfirmation(true), setTimeout( () => setResetState(4), 2000)}} className={styles.loginButton}>Reset Password</div>
+
+            <div className={styles.createAccount}>
+              <span onClick={() => window.open('/login', '_self')}>
+                Back to Login Page
+              </span>
+            </div>
+          </div>
+        </div>
+
+        :
+
+        <div className={styles.loginContainer}>
+          <div className={styles.loginBox}>
+            <div className={styles.title}>Reset complete!</div>
+
+            <div className={styles.description}>
+              All done successfully! Return to login.
+            </div>
 
             <div className={styles.createAccount}>
               <span onClick={() => window.open('/login', '_self')}>
@@ -87,26 +128,6 @@ const ForgotPage = () => {
           </div>
         </div>
       }
-
-      <div className={styles.socialContainer}>
-        <div
-          className={styles.social}
-          onClick={() =>
-            window.open('https://discord.com/invite/megahyped', '_self')
-          }
-        >
-          <Image src={discord} alt='Discord' className={styles.img} />
-        </div>
-
-        <div
-          className={styles.social}
-          onClick={() =>
-            window.open('https://twitter.com/MegaHypedDAO', '_self')
-          }
-        >
-          <Image src={twitter} alt='Twitter' className={styles.img} />
-        </div>
-      </div>
 
       <div className={styles.rightsContainer}>
         <div className={styles.option}>Privacy and Cookies</div>
