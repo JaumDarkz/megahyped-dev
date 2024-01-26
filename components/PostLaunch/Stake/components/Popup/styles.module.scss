@@ -1,0 +1,220 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.350);
+  z-index: 10;
+
+  .popup {
+    width: 700px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 20px;
+    border: 2px solid #000;
+    background: #1D1D1D;
+    box-shadow: 10px 10px 0px 0px #000;
+    padding: 30px 30px 0px 30px;
+
+    .close {
+      display: flex;
+      justify-content: flex-end;
+
+      .img {
+        cursor: url('../../../../../public/spray.png'), pointer;
+        transition: 0.3s;
+
+        &:hover {
+          filter: brightness(0.7);
+        }
+      }
+    }
+
+    .title {
+      display: flex;
+      justify-content: center;
+      
+      color: #FF2673;
+      text-align: center;
+      font-family: Consolas;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.96px;
+    }
+
+    .counter {
+      color: #BBF209;
+      font-family: Consolas;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.48px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+      gap: 25px;
+
+      .gridItem {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .img {
+          border-radius: 30px;
+          border: 3px solid #000;
+          box-shadow: 4px 4px 0px 0px #000;
+        }
+
+        .button {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 12px;
+          border: 3px solid #000;
+          background: #BBF209;
+          box-shadow: 4px 4px 0px 0px #000;
+
+          color: #000;
+          font-family: Consolas;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: -0.05px;
+
+          cursor: url('../../../../../public/spray.png'), pointer;
+          transition: 0.3s;
+
+          &:hover {
+            filter: brightness(0.7);
+          }
+        }
+      }
+    }
+  }
+
+  .secondPopup {
+    width: 490px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 20px;
+    border: 2px solid #000;
+    background: #1D1D1D;
+    box-shadow: 10px 10px 0px 0px #000;
+    padding: 30px 30px 0px 30px;
+
+    .close {
+      display: flex;
+      justify-content: flex-end;
+
+      .img {
+        cursor: url('../../../../../public/spray.png'), pointer;
+        transition: 0.3s;
+
+        &:hover {
+          filter: brightness(0.7);
+        }
+      }
+    }
+
+    .title {
+      display: flex;
+      justify-content: center;
+      
+      color: #FF2673;
+      text-align: center;
+      font-family: Consolas;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.96px;
+    }
+
+    .counter {
+      color: #BBF209;
+      font-family: Consolas;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.48px;
+      text-align: center;
+    }
+
+    .description {
+      color: #FFF;
+      text-align: center;
+      font-family: Consolas;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.48px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+      gap: 25px;
+      padding-bottom: 20px;
+
+      .gridItem {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .img {
+          border-radius: 30px;
+          border: 3px solid #000;
+          box-shadow: 4px 4px 0px 0px #000;
+        }
+
+        .button {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 12px;
+          border: 3px solid #000;
+          background: #BBF209;
+          box-shadow: 4px 4px 0px 0px #000;
+
+          color: #000;
+          font-family: Consolas;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: -0.05px;
+
+          cursor: url('../../../../../public/spray.png'), pointer;
+          transition: 0.3s;
+
+          &:hover {
+            filter: brightness(0.7);
+          }
+        }
+      }
+    }
+  }
+}

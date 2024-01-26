@@ -21,7 +21,7 @@ const ComingSoonComponent = () => {
           <Image className={styles.img} width={50} height={50} src={twitter} alt='Twitter' />
         </div>
 
-        <div className={styles.button}>
+        <div className={styles.button} onClick={() => window.open('https://megahyped.com/Litepaper_v0.1.pdf', '_blank')}>
           <div>
             <Image className={styles.img} src={whitepaper} alt='Litepaper' />
           </div>
