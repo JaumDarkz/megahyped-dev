@@ -5,14 +5,17 @@ import Sidebar from '@/components/Reutilizables/Sidebar'
 
 import styles from './styles.module.scss'
 
-import mhtoken from '@/public/assets/mhtoken.svg'
+import mhtoken from '@/public/assets/mhtoken.png'
+import global from '@/public/assets/global.png'
 import soundicon from '@/public/assets/sound.svg'
 import muteicon from '@/public/assets/mute.svg'
 import addimage from '@/public/assets/stake/add.svg'
 import blankimage from '@/public/assets/stake/blank.svg'
 
+import AudioPlayer from 'react-audio-player'
+
 const StakePage = () => {
-  const [sound, setSound] = useState(false)
+  const [audio, setAudio] = useState(false)
 
   const numberOfImages = 16
 
@@ -20,6 +23,12 @@ const StakePage = () => {
 
   return (
     <div className={styles.container}>
+      {audio && (
+        <AudioPlayer
+          src="./main.mp3"
+          autoPlay
+        />
+      )}
       <div className={styles.sidebarContainer}>
         <Sidebar />
       </div>
@@ -29,7 +38,7 @@ const StakePage = () => {
           <div className={styles.coinInfo}>
             <div className={styles.info}>
               <div className={styles.icon}>
-                <Image src={mhtoken} alt='Token' />
+                <Image src={mhtoken} alt='Token' style={{ width: '42px', height: '42px'}}/>
               </div>
 
               <div className={styles.text}>
@@ -39,7 +48,7 @@ const StakePage = () => {
 
             <div className={styles.info}>
               <div className={styles.icon}>
-                <Image src={mhtoken} alt='Token' />
+                <Image src={global} alt='Hash' style={{ width: '42px', height: '42px'}} />
               </div>
 
               <div className={styles.text}>
@@ -53,8 +62,8 @@ const StakePage = () => {
               Link Wallet
             </div>
 
-            <div className={styles.sound} onClick={() => setSound(!sound)}>
-              <Image className={styles.img} src={sound == false ? muteicon : soundicon} alt=''/>
+            <div className={styles.sound} onClick={() => setAudio(!audio)}>
+              <Image className={styles.img} src={audio == false ? muteicon : soundicon} alt=''/>
             </div>
           </div>
         </div>

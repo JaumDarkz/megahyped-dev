@@ -6,17 +6,14 @@ import LoginTextInput from '@/components/Reutilizables/LoginTextInputs'
 import styles from './styles.module.scss'
 
 import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
-import discord from '@/public/assets/discord.svg'
-import twitter from '@/public/assets/twitter.svg'
-import musicicon from '@/public/assets/sound.svg'
-import comingsoonart from '@/public/assets/comingsoonart.svg'
-import litepaper from '@/public/assets/litepaper.svg'
-import unchecked from '@/public/assets/checkboxnotchecked.svg'
-import audionotchecked from '@/public/assets/checkboxchecked.svg'
+import discord from '@/public/assets/discord2.svg'
+import twitter from '@/public/assets/twitter2.svg'
 
 const RegisterPage = () => {
-  const [checkbox, setCheckbox] = useState(false)
-  const [audio, setAudio] = useState(false)
+
+  const [emailError, setEmailError] = useState(false)
+  const [passError, setPassError] = useState(false)
+  const [passError2, setPassError2] = useState(false)
 
   return (
     <div className={styles.container}>
@@ -26,7 +23,7 @@ const RegisterPage = () => {
         </div>
 
         <div className={styles.loginContainer}>
-          <div className={styles.detail}>Lorem ipsum dolor sit amet</div>
+          <div className={styles.detail}>Megahyped ©️ 2024</div>
 
           <div className={styles.loginBox}>
             <div className={styles.title}>Register account</div>
@@ -36,22 +33,26 @@ const RegisterPage = () => {
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput error={false} placeholder='Enter e-mail' />
+              <LoginTextInput error={false} isPassword={false} placeholder='Enter Nickname' />
+            </div>
+
+            <div className={styles.emailInput}>
+              <LoginTextInput error={emailError} isPassword={false} placeholder='Enter e-mail' />
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput error={false} placeholder='Enter password' />
+              <LoginTextInput error={passError} isPassword={true} placeholder='Enter password' />
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput error={true} placeholder='Re-Enter password' />
+              <LoginTextInput error={passError2} isPassword={true} placeholder='Re-Enter password' />
             </div>
 
-            <div className={styles.loginButton}>Register</div>
+            <div className={styles.loginButton}>Create Account</div>
 
             <div className={styles.loginAccount}>
               Currently a member?{' '}
-              <span onClick={() => window.open('/login', '_self')}>
+              <span onClick={() => window.open('/', '_self')}>
                 Login to Account
               </span>
             </div>
@@ -62,25 +63,25 @@ const RegisterPage = () => {
           <div
             className={styles.social}
             onClick={() =>
-              window.open('https://discord.com/invite/megahyped', '_self')
+              window.open('https://discord.com/invite/megahyped', '_blank')
             }
           >
-            <Image src={discord} alt='Discord' className={styles.img} />
+            <Image src={discord} alt='Discord' className={styles.img} style={{ width: '24px', height: '18.18px'}}/>
           </div>
 
           <div
             className={styles.social}
             onClick={() =>
-              window.open('https://twitter.com/MegaHypedDAO', '_self')
+              window.open('https://twitter.com/MegaHypedDAO', '_blank')
             }
           >
-            <Image src={twitter} alt='Twitter' className={styles.img} />
+            <Image src={twitter} alt='Twitter' className={styles.img} style={{ width: '24px', height: '24px'}}/>
           </div>
         </div>
 
         <div className={styles.rightsContainer}>
-          <div className={styles.option}>Privacy and Cookies</div>
-          <span>|</span>
+{/*           <div className={styles.option}>Privacy and Cookies</div>
+          <span>|</span> */}
           <div className={styles.text}>Megahyped ©️ 2024</div>
         </div>
       </div>
