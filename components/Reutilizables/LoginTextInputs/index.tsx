@@ -10,7 +10,7 @@ interface Props {
 const LoginTextInput = ({placeholder, isPassword, error}:Props) => {
   return (
     <div className={styles.container}>
-      <input className={error == false ? styles.noError : styles.error} type={isPassword ? "password" : "text"} placeholder={placeholder} />
+      <input className={error == false ? styles.noError : styles.error} type={isPassword ? 'password' : 'text'} placeholder={placeholder} />
     </div>
   )
 }
