@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-import LoginTextInput from '@/components/Reutilizables/LoginTextInputs'
+import LoginTextInput from '@/components/Reusable/LoginTextInputs'
 
 import styles from './styles.module.scss'
 
@@ -43,6 +43,7 @@ const ResetPage = () => {
           if (response.status === 201) {
             setPassConfirmation(true)
             setIsLoading(false)
+            setTimeout(() => window.open('/', '_self'), 2000)
           }
         })
         .catch((error) => {
@@ -78,7 +79,7 @@ const ResetPage = () => {
 
             {passConfirmation &&
               <div className={styles.passConfirmation}>
-                Your password has been changed with success!
+                Your password has been changed sucessfully! <br /> Going back to login page in 2 seconds...
               </div>
             }
 

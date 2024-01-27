@@ -158,9 +158,9 @@
       box-shadow: 4px 4px 0px 0px #000;
       //cursor: url("../../../public/spray.png"), pointer;
 
-      .img {
-        //cursor: url("../../../public/spray.png"), pointer;
-      }
+      /* .img {
+        cursor: url("../../../public/spray.png"), pointer;
+      } */
 
       &:active {
         box-shadow: 4px 4px 0px 0px #000 inset;
@@ -173,9 +173,9 @@
     display: flex;
     gap: 20px;
 
-    .option {
-      //cursor: url("../../../public/spray.png"), pointer;
-    }
+    /* .option {
+      cursor: url("../../../public/spray.png"), pointer;
+    } */
 
     :is(span) {
       color: rgba(255, 255, 255, 0.1);

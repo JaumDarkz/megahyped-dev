@@ -1,7 +1,9 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
-import Sidebar from '@/components/Reutilizables/Sidebar'
+import Sidebar from '@/components/Reusable/Sidebar'
+import Popup from './components/Popup'
+import StakeCard from './components/StakeCard'
 
 import styles from './styles.module.scss'
 
@@ -16,12 +18,62 @@ import AudioPlayer from 'react-audio-player'
 
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
+import nft1 from '@/public/assets/stake/nfts/1.gif'
+import nft2 from '@/public/assets/stake/nfts/2.gif'
+import nft3 from '@/public/assets/stake/nfts/3.gif'
+import nft4 from '@/public/assets/stake/nfts/4.gif'
+import { getUserData } from '@/utils'
+import { AssetsContext } from '@/contexts/AssetsProvider'
+
+const nftImages = [nft1, nft2, nft3, nft4]
+
 const StakePage = () => {
+  const [popup, setPopup] = useState(false)
   const [audio, setAudio] = useState(false)
   const { publicKey, sendTransaction } = useWallet()
+  const { wallet, setWallet, assets } = useContext(AssetsContext)
   const numberOfImages = 16
 
-  const imageArray = Array.from({ length: numberOfImages }, (_, index) => index + 1)
+  const [airdropValue, setAirdropValue] = useState(0)
+
+  const getRandomRarity = () => {
+    const rarities = ['mythic', 'rare', 'common', 'uncommon', 'legendary', 'epic']
+    return rarities[Math.floor(Math.random() * rarities.length)]
+  }
+
+  const [stakeCards, setStakeCards] = useState(
+    Array.from({ length: numberOfImages }, (_, index) => ({
+      staked: true,
+      hashRate: Math.floor(Math.random() * 100),
+      id: index + 1,
+      rarity: getRandomRarity(),
+      nft: nftImages[Math.floor(Math.random() * nftImages.length)],
+    }))
+  )
+
+  const handleUnstake = (id: number) => {
+    // Remove o StakeCard com o ID correspondente
+    setStakeCards((prevStakeCards) => prevStakeCards.filter((card) => card.id !== id))
+  }
+
+  useEffect(() => {
+    if (!process.env.API_URL) return
+    getUserData(process.env.API_URL).then(
+      (response) => {
+        setAirdropValue(response.data.AirdropValue)
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+      }
+    )
+  }, [])
+
+  useEffect(() => {
+    if (!publicKey) { return }
+    setWallet(publicKey.toBase58())
+    console.log(wallet)
+  }, [publicKey, wallet, setWallet])
 
   const buttonStyles = {
     width: 'fit-content',
@@ -44,9 +96,13 @@ const StakePage = () => {
     },
   }
 
-  console.log(publicKey?.toBase58())
-
   return (
+    <>
+    {popup && (
+        <div className={styles.popup}>
+          <Popup close={(newValue: boolean) => setPopup(newValue)} />
+        </div>
+      )}
     <div className={styles.container}>
       {audio && (
         <AudioPlayer
@@ -63,44 +119,60 @@ const StakePage = () => {
           <div className={styles.coinInfo}>
             <div className={styles.info}>
               <div className={styles.icon}>
-                <Image src={mhtoken} alt='Token' style={{ width: '42px', height: '42px'}}/>
+                <Image src={mhtoken} alt='Token' style={{ width: '42px', height: '42px' }} />
               </div>
 
               <div className={styles.text}>
-                MHT AIRDROP VALUE: <span>{300}</span>
+                MHT AIRDROP: <span>{airdropValue}</span>
               </div>
             </div>
 
             <div className={styles.info}>
               <div className={styles.icon}>
-                <Image src={global} alt='Hash' style={{ width: '42px', height: '42px'}} />
+                <Image src={mhtoken} alt='Token' style={{ width: '42px', height: '42px' }} />
               </div>
 
               <div className={styles.text}>
-                GLOBAL HASH: <span>{'57.000,00'}</span>
+                MINING POWER: <span>{300} $MHT/day</span>
+              </div>
+            </div>
+
+            <div className={styles.info}>
+              <div className={styles.icon}>
+                <Image src={global} alt='Hash' style={{ width: '42px', height: '42px' }} />
+              </div>
+
+              <div className={styles.text}>
+                GLOBAL HASH RATE: <span>{300}</span>
               </div>
             </div>
           </div>
 
           <div className={styles.buttons}>
 
-              <WalletMultiButton style={buttonStyles}/>
+            <WalletMultiButton style={buttonStyles} />
 
             <div className={styles.sound} onClick={() => setAudio(!audio)}>
-              <Image className={styles.img} src={audio == false ? muteicon : soundicon} alt=''/>
+              <Image className={styles.img} src={audio == false ? muteicon : soundicon} alt='' />
             </div>
           </div>
         </div>
-
         <div className={styles.gridContainer}>
-          {imageArray.map((imageNumber) => (
-            <div key={imageNumber} className={imageNumber == 1 ? styles.addItem : styles.gridItem}>
-              <Image className={imageNumber == 1 ? styles.addImg : styles.img} src={imageNumber == 1 ? addimage : blankimage} alt={`Image ${imageNumber}`} />
+            {stakeCards.map((card) => (
+              <StakeCard key={card.id} {...card} onUnstake={() => handleUnstake(card.id)} setPopup={() => null} />
+            ))}
+            <div className={styles.gridItem}>
+              <Image
+                onClick={() => setPopup(true)}
+                className={styles.addImg}
+                src={addimage}
+                alt={'Add Stake'}
+              />
             </div>
-          ))}
-        </div>
+          </div>
       </div>
     </div>
+    </>
   )
 }
 

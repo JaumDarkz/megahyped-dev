@@ -5,11 +5,40 @@
   background-size: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   gap: 30px;
   padding: 50px;
   background-color: #171717;
+
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .sound {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      border: 2px solid #0A090B;
+      background: #FF2673;
+      box-shadow: 4px 4px 0px 0px #000;
+
+      //cursor: url("../../../public/spray.png"), pointer;
+
+      /* .img {
+        cursor: url("../../../public/spray.png"), pointer;
+      } */
+
+      &:active {
+        box-shadow: 4px 4px 0px 0px #000 inset;
+        background: #85153c;
+      }
+    }
+  }
 
   .loginContainer {
     display: flex;
@@ -107,6 +136,7 @@
         from {
           transform: rotate(0deg);
         }
+
         to {
           transform: rotate(360deg);
         }

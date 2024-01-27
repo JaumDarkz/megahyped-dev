@@ -105,6 +105,11 @@
             filter: brightness(0.6);
           }
 
+          &:active {
+            box-shadow: 4px 4px 0px 0px #000 inset;
+            background: #85153C;
+          }
+
           /* .img {
             cursor: url('../../../public/spray.png'), pointer;
           } */
@@ -118,7 +123,7 @@
       flex-wrap: wrap;
       gap: 30px;
 
-      .addItem {
+      .addImg {
         transition: 0.4s;
         //cursor: url('../../../public/spray.png'), pointer;
 

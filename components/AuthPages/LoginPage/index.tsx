@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-import LoginTextInput from '@/components/Reutilizables/LoginTextInputs'
+import LoginTextInput from '@/components/Reusable/LoginTextInputs'
 
 import styles from './styles.module.scss'
 

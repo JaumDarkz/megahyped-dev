@@ -31,7 +31,8 @@ const AssetsProvider = ({ children }) => {
     const [assets, setAssets] = useState<Asset[]>([])
     const [wallet, setWallet] = useState<string>("")
     const [assetsUpdated, setAssetsUpdated] = useState<boolean>(false)
-
+    const [rpcUrl, setRpcUrl] = useState<string>("")
+    
     const connection = new Connection("https://solana-mainnet.g.alchemy.com/v2/-aed3A2DaNwd7ey8fHzZO_iuu-h7z_Ms");
     const metaplex = new Metaplex(connection);
 

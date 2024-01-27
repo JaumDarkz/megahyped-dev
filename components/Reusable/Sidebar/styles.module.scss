@@ -49,6 +49,11 @@
         &:hover {
           filter: brightness(0.75);
         }
+
+        &:active {
+          box-shadow: 4px 4px 0px 0px #000 inset;
+          background: #6f8f07;
+        }
       }
 
       .comingOption {
@@ -92,6 +97,11 @@
         &:hover {
           filter: brightness(0.75);
         }
+
+        &:active {
+          box-shadow: 4px 4px 0px 0px #000 inset;
+          background: #85153C;
+        }
       }
     }
 
@@ -124,6 +134,11 @@
 
         &:hover {
           filter: brightness(0.75);
+        }
+
+        &:active {
+          box-shadow: 4px 4px 0px 0px #000 inset;
+          background: #6f8f07;
         }
       }
     }

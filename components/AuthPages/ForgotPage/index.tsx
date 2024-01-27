@@ -1,19 +1,22 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
-import LoginTextInput from '@/components/Reutilizables/LoginTextInputs'
+import LoginTextInput from '@/components/Reusable/LoginTextInputs'
 
 import styles from './styles.module.scss'
 
 import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
+import musicicon from '@/public/assets/sound.svg'
+import muteicon from '@/public/assets/mute.svg'
 import discord from '@/public/assets/discord2.svg'
 import twitter from '@/public/assets/twitter2.svg'
 import { recoverPassword } from '@/utils/index'
 
 const ForgotPage = () => {
-  const [resetState, setResetState] = useState(1)
+  const [resetState, setResetState] = useState(3)
   const [emailConfirmation, setEmailConfirmation] = useState(false)
   const [passConfirmation, setPassConfirmation] = useState(false)
+  const [audio, setAudio] = useState(false)
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -39,8 +42,12 @@ const ForgotPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
-        <Image src={hyperlogo} alt='Logo' width={290} />
+      <div className={styles.header}>
+        <Image src={hyperlogo} alt='Logo' width={190} />
+
+        <div className={styles.sound} onClick={() => setAudio(!audio)}>
+          <Image className={styles.img} src={audio == false ? musicicon : muteicon} alt='Sound' />
+        </div>
       </div>
 
         <div className={styles.loginContainer}>

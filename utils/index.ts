@@ -94,3 +94,41 @@ export const resetPassword = async (baseURL: string, token: string, password: st
         const response = await axios(request)
         return response
 }
+
+export const getReferrals = async (baseURL: string) => {
+
+    const auth = localStorage.getItem('userToken')
+
+    const request: any = {
+        method: 'GET',
+        url: `${baseURL}/users/referrals`,
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${auth}`
+        },
+        maxRedirects: 0,
+        data: ''
+    }
+
+    const response = await axios(request)
+    return response
+}
+
+export const getReferralRanking = async (baseURL: string) => {
+
+    const auth = localStorage.getItem('userToken')
+
+    const request: any = {
+        method: 'GET',
+        url: `${baseURL}/users/referral-ranking`,
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${auth}`
+        },
+        maxRedirects: 0,
+        data: ''
+    }
+
+    const response = await axios(request)
+    return response
+}
