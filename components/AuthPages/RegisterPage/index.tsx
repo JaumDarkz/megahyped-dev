@@ -8,12 +8,67 @@ import styles from './styles.module.scss'
 import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
 import discord from '@/public/assets/discord2.svg'
 import twitter from '@/public/assets/twitter2.svg'
+import { useRouter } from 'next/router'
+import { register } from '@/utils'
 
 const RegisterPage = () => {
 
+  const router = useRouter()
+  const { referralCode } = router.query
+
+  const [nickError, setNickError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [passError, setPassError] = useState(false)
   const [passError2, setPassError2] = useState(false)
+  const [nick, setNick] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
+
+  const validateEmail = (email: string): boolean => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return re.test(email)
+  }
+
+  const handleSubmit = () => {
+    if (process.env.API_URL) {
+      if (password === password2) {
+        // check if name, email or password is empty
+        if (nick === '') {
+          setNickError(!nickError)
+          setTimeout(() => setNickError(false), 2000)
+        } if(email === '') {
+          setEmailError(!emailError)
+          setTimeout(() => setEmailError(false), 2000)
+        } if (password === '') {
+          setPassError(!passError)
+          setTimeout(() => setPassError(false), 2000)
+        } if (!validateEmail(email)) {
+          setEmailError(!emailError)
+          setTimeout(() => setEmailError(false), 2000)
+        } else {
+          register(nick, email, password, process.env.API_URL, (referralCode ? referralCode : undefined) as string)
+          .then(
+            (response) => {
+              if (response.status === 201) {
+                window.open('/', '_self')
+              }
+            })
+          .catch(
+            (error) => {
+              if (error.response.status === 500) {
+                alert('The server seems to be offline. Please try again later.')
+              }
+            })
+        }
+      } else {
+        setPassError(!passError)
+        setPassError2(!passError2)
+        setTimeout(() => setPassError(false), 2000)
+        setTimeout(() => setPassError2(false), 2000)
+      }
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -33,22 +88,22 @@ const RegisterPage = () => {
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput error={false} isPassword={false} placeholder='Enter Nickname' />
+              <LoginTextInput error={nickError} isPassword={false} placeholder='Enter Nickname' value={nick} onChange={(e) => setNick(e.target.value)} />
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput error={emailError} isPassword={false} placeholder='Enter e-mail' />
+              <LoginTextInput error={emailError} isPassword={false} placeholder='Enter e-mail' value={email} onChange={(e) => setEmail(e.target.value)}/>
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput error={passError} isPassword={true} placeholder='Enter password' />
+            <LoginTextInput error={passError} isPassword={true} placeholder='Enter password' value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput error={passError2} isPassword={true} placeholder='Re-Enter password' />
+            <LoginTextInput error={passError2} isPassword={true} placeholder='Enter password again' value={password2} onChange={(e) => setPassword2(e.target.value)}/>
             </div>
 
-            <div className={styles.loginButton}>Create Account</div>
+            <div className={styles.loginButton} onClick={handleSubmit}>Create Account</div>
 
             <div className={styles.loginAccount}>
               Currently a member?{' '}

@@ -2,7 +2,7 @@
 <g filter="url(#filter0_d_514_509)">
 <path d="M31 3C37.6274 3 43 8.37258 43 15L43 43C43 49.6274 37.6274 55 31 55L3 55L3 3L31 3Z" fill="#BBF209"/>
 <path d="M1.5 55L1.5 56.5L3 56.5L31 56.5C38.4558 56.5 44.5 50.4558 44.5 43L44.5 15C44.5 7.54416 38.4558 1.5 31 1.5L3 1.5L1.5 1.5L1.5 3L1.5 55Z" stroke="black" stroke-width="3"/>
-<path d="M22.1667 33.375L18 29M18 29L22.1667 24.625M18 29H28" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M23.8333 33.375L28 29M28 29L23.8333 24.625M28 29H18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <defs>
 <filter id="filter0_d_514_509" x="0" y="0" width="50" height="62" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">

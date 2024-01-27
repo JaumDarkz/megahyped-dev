@@ -13,6 +13,8 @@ const ForgotPage = () => {
   const [resetState, setResetState] = useState(1)
   const [emailConfirmation, setEmailConfirmation] = useState(false)
   const [passConfirmation, setPassConfirmation] = useState(false)
+  const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState(false)
 
   return (
     <div className={styles.container}>
@@ -37,7 +39,7 @@ const ForgotPage = () => {
             }
 
             <div className={styles.emailInput}>
-              <LoginTextInput error={false} isPassword={false} placeholder='Enter e-mail' />
+            <LoginTextInput error={emailError} isPassword={false} placeholder='Enter mail' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
 
             <div onClick={() => {setTimeout( () => setResetState(2), 2000); setEmailConfirmation(true)}} className={styles.loginButton}>Send Confirmation</div>

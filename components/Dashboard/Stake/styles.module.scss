@@ -79,7 +79,7 @@
           font-weight: 700;
           line-height: normal;
           letter-spacing: -0.05px;
-          cursor: url('../../../public/spray.png'), pointer;
+          //cursor: url('../../../public/spray.png'), pointer;
           transition: 0.3s;
 
           &:hover {
@@ -97,7 +97,7 @@
           border: 2px solid #0A090B;
           background: #FF2673;
           box-shadow: 4px 4px 0px 0px #000;
-          cursor: url('../../../public/spray.png'), pointer;
+          //cursor: url('../../../public/spray.png'), pointer;
 
           transition: 0.3s;
 
@@ -105,9 +105,9 @@
             filter: brightness(0.6);
           }
 
-          .img {
+          /* .img {
             cursor: url('../../../public/spray.png'), pointer;
-          }
+          } */
         }
       }
     }
@@ -120,15 +120,15 @@
 
       .addItem {
         transition: 0.4s;
-        cursor: url('../../../public/spray.png'), pointer;
+        //cursor: url('../../../public/spray.png'), pointer;
 
         &:hover {
           filter: brightness(0.75);
         }
 
-        .addImg {
+        /* .addImg {
           cursor: url('../../../public/spray.png'), pointer;
-        }
+        } */
       }
 
       .gridItem {

@@ -39,9 +39,9 @@
         justify-content: center;
         border-radius: 12px;
         border: 2px solid #000;
-        background: #505050;
+        background: #BBF209;
         box-shadow: 4px 4px 0px 0px #000;
-        cursor: url('../../../public/spray.png'), pointer;
+        //cursor: url('../../../public/spray.png'), pointer;
         color: black;
 
         transition: 0.4s;
@@ -108,9 +108,9 @@
         justify-content: center;
         border-radius: 12px;
         border: 2px solid #000;
-        background: #505050;
+        background: #BBF209;
         box-shadow: 4px 4px 0px 0px #000;
-        cursor: url('../../../public/spray.png'), pointer;
+        //cursor: url('../../../public/spray.png'), pointer;
         color: black;
 
         font-family: Consolas;
@@ -139,9 +139,9 @@
       filter: brightness(0.75);
     }
 
-    .img {
+    /* .img {
       cursor: url('../../../public/spray.png'), pointer;
-    }
+    } */
   }
 
   &.sidebar-closed {

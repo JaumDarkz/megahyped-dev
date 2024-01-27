@@ -14,6 +14,9 @@ const ResetPage = () => {
   const [emailConfirmation, setEmailConfirmation] = useState(false)
   const [passConfirmation, setPassConfirmation] = useState(false)
 
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -39,11 +42,11 @@ const ResetPage = () => {
             }
 
             <div className={styles.emailInput}>
-              <LoginTextInput error={false} isPassword={true} placeholder='Enter New Password' />
+              <LoginTextInput error={false} isPassword={true} placeholder='Enter New Password' value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput error={false} isPassword={true} placeholder='Re-enter New Password' />
+              <LoginTextInput error={false} isPassword={true} placeholder='Re-enter New Password' value={password2} onChange={(e) => setPassword2(e.target.value)} />
             </div>
 
             <div className={styles.loginButton}>Reset Password</div>

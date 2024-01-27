@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from './styles.module.scss'
 import logo from '@/public/assets/brand/LogoHyperverse.svg'
 import hide from '@/public/assets/hidesidebar.svg'
+import show from '@/public/assets/showsidebar.svg'
 
 const Sidebar = () => {
   const [webpath, setWebpath] = useState('')
@@ -54,7 +55,8 @@ const Sidebar = () => {
       </div>
 
       <div className={styles.hide}>
-        <Image onClick={toggleSidebar} className={styles.img} src={hide} alt='Hide Sidebar' />
+        {sidebarClosed ? <Image onClick={toggleSidebar} className={styles.img} src={show} alt='Show Sidebar' /> : <Image onClick={toggleSidebar} className={styles.img} src={hide} alt='Hide Sidebar' />}
+        
       </div>
     </div>
   )

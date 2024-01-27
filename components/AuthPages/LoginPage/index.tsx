@@ -11,14 +11,56 @@ import twitter from '@/public/assets/twitter2.svg'
 import musicicon from '@/public/assets/sound.svg'
 import comingsoonart from '@/public/assets/comingsoonart.svg'
 import litepaper from '@/public/assets/litepaper.svg'
-import unchecked from '@/public/assets/checkboxnotchecked.svg'
 import audionotchecked from '@/public/assets/checkboxchecked.svg'
+import { login } from '../../../utils'
 
 import AudioPlayer from 'react-audio-player'
 
 const LoginPage = () => {
-  const [checkbox, setCheckbox] = useState(false)
   const [audio, setAudio] = useState(true)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passError, setPassError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+
+  const handleEnter = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLogin()
+      console.log(email, password)
+    }
+  }
+
+  const handleLogin = () => {
+    if (process.env.API_URL) {
+      login(email, password, process.env.API_URL)
+        .then(
+          (response) => {
+            if (response.status === 201) {
+              const userToken = response.data.accessToken
+              localStorage?.setItem('userToken', userToken)
+              window.open('/stake', '_self')
+            }
+          }
+        ).catch(
+          (error) => {
+            if (error.response.status === 404) {
+              setEmailError(!emailError)
+              // Set a timer to reset emailError to false after 2000ms
+              setTimeout(() => setEmailError(false), 2000)
+            }
+            if (error.response.status === 401) {
+              setPassError(!passError)
+              // Set a timer to reset passError to false after 2000ms
+              setTimeout(() => setPassError(false), 2000)
+            }
+          }
+        )
+    } else {
+      alert('The server seems to be offline. Please try again later.')
+    }
+  }
+
+
 
   return (
     <div className={styles.container}>
@@ -44,14 +86,14 @@ const LoginPage = () => {
             </div>
 
             <div className={styles.emailInput}>
-              <LoginTextInput error={false} isPassword={false} placeholder='Enter e-mail' />
+            <LoginTextInput error={emailError} isPassword={false} placeholder='Enter mail' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
 
             <div className={styles.passwordInput}>
-              <LoginTextInput error={false} isPassword={true} placeholder='Enter password' />
+              <LoginTextInput error={passError} isPassword={true} placeholder='Enter password' value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={handleEnter}/>
             </div>
 
-            <div className={styles.loginButton}>Login</div>
+            <div className={styles.loginButton} onClick={handleLogin}>Login</div>
 
             <div className={styles.optionsContainer}>
               <div className={styles.rememberMe}>

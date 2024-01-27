@@ -11,15 +11,40 @@ import soundicon from '@/public/assets/sound.svg'
 import muteicon from '@/public/assets/mute.svg'
 import addimage from '@/public/assets/stake/add.svg'
 import blankimage from '@/public/assets/stake/blank.svg'
-
+import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import AudioPlayer from 'react-audio-player'
+
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 const StakePage = () => {
   const [audio, setAudio] = useState(false)
-
+  const { publicKey, sendTransaction } = useWallet()
   const numberOfImages = 16
 
   const imageArray = Array.from({ length: numberOfImages }, (_, index) => index + 1)
+
+  const buttonStyles = {
+    width: 'fit-content',
+    height: '45px',
+    padding: '12px 14px',
+    borderRadius: '12px',
+    border: '2px solid #000',
+    background: '#BBF209',
+    boxShadow: '4px 4px 0px 0px #000',
+    color: '#000',
+    fontFamily: 'Consolas',
+    fontSize: '14px',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 'normal',
+    letterSpacing: '-0.05px',
+    transition: '0.3s',
+    '&:hover': {
+      filter: 'brightness(0.75)',
+    },
+  }
+
+  console.log(publicKey?.toBase58())
 
   return (
     <div className={styles.container}>
@@ -42,7 +67,7 @@ const StakePage = () => {
               </div>
 
               <div className={styles.text}>
-                MHT: <span>{300}</span>
+                MHT AIRDROP VALUE: <span>{300}</span>
               </div>
             </div>
 
@@ -58,9 +83,8 @@ const StakePage = () => {
           </div>
 
           <div className={styles.buttons}>
-            <div className={styles.button}>
-              Link Wallet
-            </div>
+
+              <WalletMultiButton style={buttonStyles}/>
 
             <div className={styles.sound} onClick={() => setAudio(!audio)}>
               <Image className={styles.img} src={audio == false ? muteicon : soundicon} alt=''/>
