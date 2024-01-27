@@ -4,7 +4,11 @@ import { useState } from 'react'
 import styles from './styles.module.scss'
 
 import closeicon from '@/public/assets/stake/closeicon.svg'
-import nft from '@/public/assets/stake/1.gif'
+import nft1 from '@/public/assets/stake/nfts/1.gif'
+import nft2 from '@/public/assets/stake/nfts/2.gif'
+import nft3 from '@/public/assets/stake/nfts/3.gif'
+import nft4 from '@/public/assets/stake/nfts/4.gif'
+import StakeCard from '../StakeCard'
 
 interface Props {
   close: (newValue: boolean) => void
@@ -36,11 +40,7 @@ const Popup = ({close}:Props) => {
           <div className={styles.grid}>
             {imageArray.map((imageNumber) => (
               <div key={imageNumber} className={styles.gridItem}>
-                <Image className={styles.img} src={nft} alt={`Image ${imageNumber}`} width={180} />
-                
-                <div className={styles.button} onClick={() => setPopupState(2)}>
-                  Stake
-                </div>
+                <StakeCard nft={nft1} id={1111} hashRate={32} rarity='Mythic' staked={false} onUnstake={() => null} setPopup={(bool) => bool == true ? setPopupState(2) : setPopupState(2)}  />
               </div>
             ))}
           </div>
@@ -63,7 +63,7 @@ const Popup = ({close}:Props) => {
 
           <div className={styles.grid}>
             <div className={styles.gridItem}>
-              <Image className={styles.img} src={nft} alt='Faction' width={180} />
+              <Image className={styles.img} src={nft1} alt='Faction' width={180} />
               
               <div className={styles.counter}>
                 {'333/600'}
@@ -75,7 +75,7 @@ const Popup = ({close}:Props) => {
             </div>
 
             <div className={styles.gridItem}>
-              <Image className={styles.img} src={nft} alt='Faction' width={180} />
+              <Image className={styles.img} src={nft2} alt='Faction' width={180} />
               
               <div className={styles.counter}>
                 {'333/600'}
@@ -87,7 +87,7 @@ const Popup = ({close}:Props) => {
             </div>
 
             <div className={styles.gridItem}>
-              <Image className={styles.img} src={nft} alt='Faction' width={180} />
+              <Image className={styles.img} src={nft3} alt='Faction' width={180} />
               
               <div className={styles.counter}>
                 {'333/600'}
@@ -99,7 +99,7 @@ const Popup = ({close}:Props) => {
             </div>
 
             <div className={styles.gridItem}>
-              <Image className={styles.img} src={nft} alt='Faction' width={180} />
+              <Image className={styles.img} src={nft4} alt='Faction' width={180} />
               
               <div className={styles.counter}>
                 {'333/600'}

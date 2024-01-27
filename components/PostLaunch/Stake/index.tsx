@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import Sidebar from '@/components/Reutilizables/Sidebar'
 import Popup from './components/Popup'
+import StakeCard from './components/StakeCard'
 
 import styles from './styles.module.scss'
 
@@ -12,21 +13,46 @@ import muteicon from '@/public/assets/mute.svg'
 import addimage from '@/public/assets/stake/add.svg'
 import blankimage from '@/public/assets/stake/blank.svg'
 
+import nft1 from '@/public/assets/stake/nfts/1.gif'
+import nft2 from '@/public/assets/stake/nfts/2.gif'
+import nft3 from '@/public/assets/stake/nfts/3.gif'
+import nft4 from '@/public/assets/stake/nfts/4.gif'
+
+const nftImages = [nft1, nft2, nft3, nft4]
+
 const StakePage = () => {
   const [sound, setSound] = useState(false)
   const [popup, setPopup] = useState(false)
 
   const numberOfImages = 16
 
-  const imageArray = Array.from({ length: numberOfImages }, (_, index) => index + 1)
+  const getRandomRarity = () => {
+    const rarities = ['mythic', 'rare', 'common', 'uncommon', 'legendary', 'epic']
+    return rarities[Math.floor(Math.random() * rarities.length)]
+  }
+
+  const [stakeCards, setStakeCards] = useState(
+    Array.from({ length: numberOfImages }, (_, index) => ({
+      staked: true,
+      hashRate: Math.floor(Math.random() * 100),
+      id: index + 1,
+      rarity: getRandomRarity(),
+      nft: nftImages[Math.floor(Math.random() * nftImages.length)],
+    }))
+  )
+
+  const handleUnstake = (id:number) => {
+    // Remove o StakeCard com o ID correspondente
+    setStakeCards((prevStakeCards) => prevStakeCards.filter((card) => card.id !== id))
+  }
 
   return (
     <>
-      {popup &&
+      {popup && (
         <div className={styles.popup}>
           <Popup close={(newValue: boolean) => setPopup(newValue)} />
         </div>
-      }
+      )}
 
       <div className={styles.container}>
         <div className={styles.sidebarContainer}>
@@ -58,22 +84,26 @@ const StakePage = () => {
             </div>
 
             <div className={styles.buttons}>
-              <div className={styles.button}>
-                Link Wallet
-              </div>
+              <div className={styles.button}>Link Wallet</div>
 
               <div className={styles.sound} onClick={() => setSound(!sound)}>
-                <Image className={styles.img} src={sound == false ? muteicon : soundicon} alt=''/>
+                <Image className={styles.img} src={sound == false ? muteicon : soundicon} alt='Sound' />
               </div>
             </div>
           </div>
 
           <div className={styles.gridContainer}>
-            {imageArray.map((imageNumber) => (
-              <div key={imageNumber} className={imageNumber == 1 ? styles.addItem : styles.gridItem}>
-                <Image onClick={() => imageNumber == 1 ? setPopup(true) : null} className={imageNumber == 1 ? styles.addImg : styles.img} src={imageNumber == 1 ? addimage : blankimage} alt={`Image ${imageNumber}`} />
-              </div>
+            {stakeCards.map((card) => (
+              <StakeCard key={card.id} {...card} onUnstake={() => handleUnstake(card.id)} setPopup={() => null} />
             ))}
+            <div className={styles.gridItem}>
+              <Image
+                onClick={() => setPopup(true)}
+                className={styles.addImg}
+                src={addimage}
+                alt={'Add Stake'}
+              />
+            </div>
           </div>
         </div>
       </div>

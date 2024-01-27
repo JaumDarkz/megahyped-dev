@@ -117,26 +117,12 @@
       flex-wrap: wrap;
       gap: 30px;
 
-      .addItem {
+      .addImg {
         transition: 0.4s;
         cursor: url('../../../public/spray.png'), pointer;
 
         &:hover {
           filter: brightness(0.75);
-        }
-
-        .addImg {
-          cursor: url('../../../public/spray.png'), pointer;
-        }
-      }
-
-      .gridItem {
-        
-        .img {
-          transition: 0.4s;
-          &:hover {
-            filter: brightness(0.6);
-          }
         }
       }
     }
