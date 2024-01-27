@@ -9,13 +9,54 @@ import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
 import discord from '@/public/assets/discord2.svg'
 import twitter from '@/public/assets/twitter2.svg'
 
+import { useRouter } from 'next/router'
+import { resetPassword } from '@/utils'
+
 const ResetPage = () => {
+
+  const route = useRouter()
+  const { tokenid } = route.query
   const [resetState, setResetState] = useState(1)
   const [emailConfirmation, setEmailConfirmation] = useState(false)
   const [passConfirmation, setPassConfirmation] = useState(false)
 
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleRedefine = () => {
+    if(process.env.API_URL) {
+      if (tokenid === undefined) {
+        alert('Recovery token not found!')
+        return
+      }
+
+      if (password !== password2) {
+        alert('Passwords do not match!')
+        return
+      }
+
+      setIsLoading(true)
+      resetPassword(process.env.API_URL, tokenid.toString(), password)
+        .then((response) => {
+          if (response.status === 201) {
+            setPassConfirmation(true)
+            setIsLoading(false)
+          }
+        })
+        .catch((error) => {
+          setIsLoading(false)
+          if (error.response.status === 404) {
+            alert('Recovery token not found!')
+          } else {
+            alert('Unexpected Error')
+          }
+        })
+      } else {
+        alert('The server is not available. Please try again later.')
+      }  
+  }
 
   return (
     <div className={styles.container}>
@@ -49,7 +90,7 @@ const ResetPage = () => {
               <LoginTextInput error={false} isPassword={true} placeholder='Re-enter New Password' value={password2} onChange={(e) => setPassword2(e.target.value)} />
             </div>
 
-            <div className={styles.loginButton}>Reset Password</div>
+            <div className={styles.loginButton} onClick={handleRedefine}>Reset Password</div>
 
             <div className={styles.createAccount}>
               <span onClick={() => window.open('/', '_self')}>
