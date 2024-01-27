@@ -8,6 +8,7 @@ import styles from './styles.module.scss'
 import hyperlogo from '@/public/assets/brand/LogoHyperverse.svg'
 import discord from '@/public/assets/discord2.svg'
 import twitter from '@/public/assets/twitter2.svg'
+import { recoverPassword } from '@/utils/index'
 
 const ForgotPage = () => {
   const [resetState, setResetState] = useState(1)
@@ -15,6 +16,26 @@ const ForgotPage = () => {
   const [passConfirmation, setPassConfirmation] = useState(false)
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleRedefinePass = () => {
+    if(process.env.API_URL) {
+      setIsLoading(true)
+      recoverPassword(process.env.API_URL, email)
+        .then((response) => {
+          if (response.status === 201) {
+            setEmailConfirmation(true)
+            setIsLoading(false)
+          }
+        })
+        .catch((error) => {
+          setEmailError(true)
+          setIsLoading(false)
+        })
+    } else {
+      alert('The server is not available. Please try again later.')
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -42,7 +63,7 @@ const ForgotPage = () => {
             <LoginTextInput error={emailError} isPassword={false} placeholder='Enter mail' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
 
-            <div onClick={() => {setTimeout( () => setResetState(2), 2000); setEmailConfirmation(true)}} className={styles.loginButton}>Send Confirmation</div>
+            <div onClick={handleRedefinePass} className={`${styles.loginButton} ${isLoading ? styles.loading : ''}`}>Send Confirmation</div>
 
             <div className={styles.createAccount}>
               <span onClick={() => window.open('/', '_self')}>

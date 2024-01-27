@@ -57,3 +57,40 @@ export const getUserData = async (baseURL: string): Promise<any> => {
     const response = await axios(request)
     return response
 }
+
+export const recoverPassword = async (baseURL: string, email: string) => {
+
+    const data = JSON.stringify({ "email": email });
+
+    const request: any = {
+        method: 'post',
+        url: `${baseURL}/recover-password`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        data: data
+    }
+
+
+        const response = await axios(request)
+        return response
+}
+
+export const resetPassword = async (baseURL: string, token: string, password: string) => {
+
+    const data = JSON.stringify({ "newPassword": password });
+
+    const request: any = {
+        method: 'post',
+        url: `${baseURL}/reset-password/${token}`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        data: data
+    }
+
+        const response = await axios(request)
+        return response
+}

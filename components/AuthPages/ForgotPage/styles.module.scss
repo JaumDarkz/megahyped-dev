@@ -76,6 +76,7 @@
         background: #bbf209;
         box-shadow: 4px 4px 0px 0px #000;
         padding: 12px 0px;
+        align-items: flex-end;
         //cursor: url("../../../public/spray.png"), pointer;
 
         &:active {
@@ -83,11 +84,32 @@
           background: #6f8f07;
         }
 
+        &.loading {
+          cursor: not-allowed;
+          background-color: #6f8f07;
+
+          &:before {
+            content: '\02941'; // Unicode character
+            display: inline-block;
+            margin-right: 5px;
+            animation: spin 1s infinite linear;
+          }
+        }
+
         color: #0a090b;
         font-size: 14px;
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.05px;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       .optionsContainer {
