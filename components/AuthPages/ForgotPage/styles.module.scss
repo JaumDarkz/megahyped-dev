@@ -9,6 +9,7 @@
   justify-content: space-between;
   gap: 30px;
   padding: 50px;
+  background-color: #171717;
 
   .header {
     width: 100%;
@@ -26,20 +27,39 @@
       background: #FF2673;
       box-shadow: 4px 4px 0px 0px #000;
 
-      cursor: url("../../../public/spray.png"), pointer;
+      //cursor: url("../../../public/spray.png"), pointer;
 
-      .img {
+      /* .img {
         cursor: url("../../../public/spray.png"), pointer;
-      }
+      } */
 
       &:active {
         box-shadow: 4px 4px 0px 0px #000 inset;
+        background: #85153c;
       }
     }
   }
 
   .loginContainer {
     display: flex;
+
+    .detail {
+      width: 200px;
+      height: 40px;
+      position: absolute;
+      transform: rotate(-90deg) translate(-150px, -120px);
+      border-radius: 12px 12px 0px 0px;
+      background: #bbf209;
+      box-shadow: 1.5px 1.5px 0px 0px #000;
+      padding: 9px 5px;
+      color: #0a090b;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.05px;
+      justify-content: center;
+      text-align: center;
+    }
 
     .loginBox {
       width: 460px;
@@ -85,18 +105,41 @@
         background: #bbf209;
         box-shadow: 4px 4px 0px 0px #000;
         padding: 12px 0px;
-        cursor: url("../../../public/spray.png"), pointer;
+        align-items: flex-end;
+        //cursor: url("../../../public/spray.png"), pointer;
 
         &:active {
           box-shadow: 4px 4px 0px 0px #000 inset;
+          background: #6f8f07;
+        }
+
+        &.loading {
+          cursor: not-allowed;
+          background-color: #6f8f07;
+
+          &:before {
+            content: '\02941'; // Unicode character
+            display: inline-block;
+            margin-right: 5px;
+            animation: spin 1s infinite linear;
+          }
         }
 
         color: #0a090b;
         font-size: 14px;
-        font-style: italic;
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.05px;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       .optionsContainer {
@@ -111,7 +154,6 @@
           .text {
             margin-top: -2px;
             font-size: 16px;
-            font-style: italic;
             font-weight: 400;
             line-height: normal;
             letter-spacing: -0.18px;
@@ -120,37 +162,61 @@
 
         .forgot {
           color: #bbf209;
-          font-family: ABeeZee;
+          font-family: Consolas;
           font-size: 14px;
-          font-style: italic;
           font-weight: 400;
           line-height: normal;
           letter-spacing: -0.02px;
 
-          cursor: url("../../../public/spray.png"), pointer;
+          //cursor: url("../../../public/spray.png"), pointer;
         }
       }
 
       .createAccount {
         color: #fff;
-        font-family: ABeeZee;
+        font-family: Consolas;
         font-size: 14px;
-        font-style: italic;
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.13px;
 
         :is(span) {
           color: #bbf209;
-          font-family: ABeeZee;
+          font-family: Consolas;
           font-size: 14px;
-          font-style: italic;
           font-weight: 400;
           line-height: normal;
           letter-spacing: -0.02px;
 
-          cursor: url("../../../public/spray.png"), pointer;
+          //cursor: url("../../../public/spray.png"), pointer;
         }
+      }
+    }
+  }
+
+  .socialContainer {
+    display: flex;
+    gap: 25px;
+
+    .social {
+      width: 46px;
+      height: 46px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      border: 2px solid #0a090b;
+      background: #ff2673;
+      box-shadow: 4px 4px 0px 0px #000;
+      //cursor: url("../../../public/spray.png"), pointer;
+
+      /* .img {
+        cursor: url("../../../public/spray.png"), pointer;
+      } */
+
+      &:active {
+        box-shadow: 4px 4px 0px 0px #000 inset;
+        background: #85153c;
       }
     }
   }
@@ -159,9 +225,9 @@
     display: flex;
     gap: 20px;
 
-    .option {
+    /* .option {
       cursor: url("../../../public/spray.png"), pointer;
-    }
+    } */
 
     :is(span) {
       color: rgba(255, 255, 255, 0.1);

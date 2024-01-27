@@ -1,6 +1,9 @@
 import Head from 'next/head'
 
-import StakePage from '@/components/PostLaunch/Stake'
+import StakePage from '@/components/Dashboard/Stake'
+
+import { Wallet } from '../contexts/SolanaWalletProvider'
+import AssetsProvider from '../contexts/AssetsProvider'/*  */
 
 export default function Stake() {
   return (
@@ -11,8 +14,11 @@ export default function Stake() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/vector.ico" />
       </Head>
-
-      <StakePage />
+      <Wallet>
+        <AssetsProvider>
+          <StakePage />
+        </AssetsProvider>
+      </Wallet>
     </>
   )
 }

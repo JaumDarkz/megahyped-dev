@@ -1,6 +1,8 @@
 import Head from 'next/head'
 
-import ReferralPage from '@/components/PostLaunch/Referral'
+import ReferralPage from '@/components/Dashboard/Referral'
+import { Wallet } from '../contexts/SolanaWalletProvider'
+import AssetsProvider from '../contexts/AssetsProvider'/*  */
 
 export default function Stake() {
   return (
@@ -12,7 +14,11 @@ export default function Stake() {
         <link rel="icon" href="/vector.ico" />
       </Head>
 
-      <ReferralPage />
+      <Wallet>
+        <AssetsProvider>
+          <ReferralPage />
+        </AssetsProvider>
+      </Wallet>
     </>
   )
 }

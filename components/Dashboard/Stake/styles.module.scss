@@ -1,0 +1,150 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  gap: 50px;
+  background-image: url('../../../public/assets/csbg.svg');
+  background-size: 100%;
+  padding: 60px;
+  background-color: #171717;
+
+  .stakeContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      
+      .coinInfo {
+        display: flex;
+        gap: 20px;
+
+        .info {
+          width: fit-content;
+          height: 45px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 14px;
+          border-radius: 12px;
+          border: 2px solid #000;
+          background: #BBF209;
+          box-shadow: 4px 4px 0px 0px #000;
+
+          .text {
+            margin-top: -2px;
+            color: #000;
+            font-family: Consolas;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: -0.05px;
+
+            span {
+              color: #000;
+              font-family: Consolas;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+              letter-spacing: -0.05px;
+            }
+          }
+        }
+      }
+
+      .buttons {
+        display: flex;
+        gap: 20px;
+
+
+        .button {
+          width: fit-content;
+          height: 45px;
+          padding: 12px 14px;
+          border-radius: 12px;
+          border: 2px solid #000;
+          background: #BBF209;
+          box-shadow: 4px 4px 0px 0px #000;
+
+          color: #000;
+          font-family: Consolas;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: -0.05px;
+          //cursor: url('../../../public/spray.png'), pointer;
+          transition: 0.3s;
+
+          &:hover {
+            filter: brightness(0.75);
+          }
+        }
+
+        .sound {
+          width: 45px;
+          height: 45px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          border: 2px solid #0A090B;
+          background: #FF2673;
+          box-shadow: 4px 4px 0px 0px #000;
+          //cursor: url('../../../public/spray.png'), pointer;
+
+          transition: 0.3s;
+
+          &:hover {
+            filter: brightness(0.6);
+          }
+
+          &:active {
+            box-shadow: 4px 4px 0px 0px #000 inset;
+            background: #85153C;
+          }
+
+          /* .img {
+            cursor: url('../../../public/spray.png'), pointer;
+          } */
+        }
+      }
+    }
+
+    .gridContainer {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+
+      .addImg {
+        transition: 0.4s;
+        //cursor: url('../../../public/spray.png'), pointer;
+
+        &:hover {
+          filter: brightness(0.75);
+        }
+
+        /* .addImg {
+          cursor: url('../../../public/spray.png'), pointer;
+        } */
+      }
+
+      .gridItem {
+        
+        .img {
+          transition: 0.4s;
+          &:hover {
+            filter: brightness(0.6);
+          }
+        }
+      }
+    }
+  }
+}
