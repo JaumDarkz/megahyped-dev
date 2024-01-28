@@ -18,10 +18,10 @@ import AudioPlayer from 'react-audio-player'
 
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
-import nft1 from '@/public/assets/stake/nfts/1.gif'
-import nft2 from '@/public/assets/stake/nfts/2.gif'
-import nft3 from '@/public/assets/stake/nfts/3.gif'
-import nft4 from '@/public/assets/stake/nfts/4.gif'
+import nft1 from '@/public/assets/stake/nfts/1.svg'
+import nft2 from '@/public/assets/stake/nfts/2.svg'
+import nft3 from '@/public/assets/stake/nfts/3.svg'
+import nft4 from '@/public/assets/stake/nfts/4.svg'
 import { getUserData } from '@/utils'
 import { AssetsContext } from '@/contexts/AssetsProvider'
 
