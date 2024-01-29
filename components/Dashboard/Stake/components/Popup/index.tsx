@@ -34,7 +34,7 @@ const Popup = ({close}:Props) => {
           </div>
 
           <div className={styles.description}>
-            Choose which vandal you would like to Stake. You can Unstake any time you want. You can only Stake one Vandal at a time. You Hash Rate is calculated using current data without Faction's bonus.
+            Choose which vandal you would like to Stake. You can Unstake any time you want. You can only Stake one Vandal at a time. You Hash Rate is calculated using current data without Faction bonus.
           </div>
 
           <div className={styles.counter}>
