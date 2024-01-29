@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import styles from './styles.module.scss'
 
-import closeicon from '@/public/assets/stake/closeicon.svg'
+import closeicon from '@/public/assets/stake/closeicon.png'
 import nft1 from '@/public/assets/stake/nfts/1.gif'
 import nft2 from '@/public/assets/stake/nfts/2.gif'
 import nft3 from '@/public/assets/stake/nfts/3.gif'
@@ -26,11 +26,15 @@ const Popup = ({close}:Props) => {
       {popupState == 1 ? 
         <div className={styles.popup}>
           <div className={styles.close} onClick={() => close(false)}>
-            <Image className={styles.img} src={closeicon} alt='Close' />
+            <Image className={styles.img} src={closeicon} style={{ width: '62px', height: '38px'}} alt='Close' />
           </div>
 
           <div className={styles.title}>
-            Choose Vandal
+            Choose a Vandal
+          </div>
+
+          <div className={styles.description}>
+            Choose which vandal you would like to Stake. You can Unstake any time you want. You can only Stake one Vandal at a time. You Hash Rate is calculated using current data without Faction's bonus.
           </div>
 
           <div className={styles.counter}>
@@ -50,15 +54,15 @@ const Popup = ({close}:Props) => {
 
         <div className={styles.secondPopup}>
           <div className={styles.close} onClick={() => close(false)}>
-            <Image className={styles.img} src={closeicon} alt='Close' />
+            <Image className={styles.img} src={closeicon} style={{ width: '62px', height: '38px'}} alt='Close' />
           </div>
 
           <div className={styles.title}>
-            Choose Vandal
+            Choose a Vandal
           </div>
 
           <div className={styles.description}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            You have to assign your Vandal to one of Hyperverse four Factions. Your Hash Rate is influenced by the Population of the faction you choose.
           </div>
 
           <div className={styles.grid}>
@@ -70,7 +74,7 @@ const Popup = ({close}:Props) => {
               </div>
 
               <div className={styles.button} onClick={() => close(false)}>
-                Faction Name
+                The Guts
               </div>
             </div>
 
@@ -82,7 +86,7 @@ const Popup = ({close}:Props) => {
               </div>
 
               <div className={styles.button} onClick={() => close(false)}>
-                Faction Name
+                Northwest Temple
               </div>
             </div>
 
@@ -94,7 +98,7 @@ const Popup = ({close}:Props) => {
               </div>
 
               <div className={styles.button} onClick={() => close(false)}>
-                Faction Name
+                The Night District
               </div>
             </div>
 
@@ -106,7 +110,7 @@ const Popup = ({close}:Props) => {
               </div>
 
               <div className={styles.button} onClick={() => close(false)}>
-                Faction Name
+                The Undergrounds
               </div>
             </div>
           </div>
