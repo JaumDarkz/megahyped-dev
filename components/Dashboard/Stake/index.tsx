@@ -52,7 +52,6 @@ const StakePage = () => {
   )
 
   const handleUnstake = (id: number) => {
-    // Remove o StakeCard com o ID correspondente
     setStakeCards((prevStakeCards) => prevStakeCards.filter((card) => card.id !== id))
   }
 
