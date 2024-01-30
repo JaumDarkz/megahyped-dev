@@ -7,6 +7,7 @@ export type Asset = {
     image: string
     mintAddress: string
     address: any
+    rarity?: string
 }
 
 interface IAssetContext {
@@ -53,12 +54,20 @@ const AssetsProvider = ({ children }) => {
             const metadata = await fetch(asset.uri);
             const json = await metadata.json();
 
+            // import ./utils/rarity.json as an object
+            const rarity = require('../utils/rarity.json')
+            // find in the object the rarity of the asset using json.name
+
+            const rarityData = rarity.find((rarity) => rarity.name === json.name)
+            //console.log(rarityData.rarity)
+
             return {
                 name: json.name,
                 image: json.image,
                 // @ts-ignore
                 mintAddress: asset.mintAddress,
                 address: asset.address,
+                rarity: rarityData.rarity
             };
         }));
     

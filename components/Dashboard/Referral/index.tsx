@@ -10,16 +10,13 @@ import soundicon from '@/public/assets/sound.svg'
 import muteicon from '@/public/assets/mute.svg'
 import copyicon from '@/public/assets/copyicon.png'
 import global from '@/public/assets/global.png'
-
-import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import AudioPlayer from 'react-audio-player'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
-import { getUserData, getReferrals, getReferralRanking } from '@/utils'
+import { getUserData, getReferrals, getReferralRanking, getGlobalHash, getStakes } from '@/utils'
 
 const ReferralPage = () => {
   const [audio, setAudio] = useState(false)
   const [copyModal, setCopyModal] = useState(false)
-  const { publicKey, sendTransaction } = useWallet()
   const [referral, setReferral] = useState<string>('')
   const [totalUniqueReferrals, setTotalUniqueReferrals] = useState<number>(0)
   const [totalExtraReferrals, setTotalExtraReferrals] = useState<number>(0)
@@ -27,6 +24,9 @@ const ReferralPage = () => {
   const [referralRanking, setReferralRanking] = useState<any>([])
   const [currentPosition, setCurrentPosition] = useState<number>(0)
   const [airdropValue, setAirdropValue] = useState(0)
+  const [myMiningPower, setMyMiningPower] = useState(0)
+  const [globalHash, setGlobalHash] = useState(0)
+  const [ userMail, setUserMail ] = useState('')
 
   useEffect(() => {
     if (!process.env.API_URL) return
@@ -37,6 +37,7 @@ const ReferralPage = () => {
         setReferral(window.location.origin + '/register?referralCode=' + response.data.referralCode)
         setUserName(response.data.name)
         setAirdropValue(response.data.AirdropValue)
+        setUserMail(response.data.email)
 
         //setReferral(response.data.referralCode)
       }
@@ -65,7 +66,31 @@ const ReferralPage = () => {
         console.log(error)
       }
     )
+    getGlobalHash(process.env.API_URL).then(
+      (response) => {
+        setGlobalHash(response.data)
+      }).catch(
+        (error) => {
+          console.log(error)
+        }
+      )
   }, [])
+
+  useEffect(() => {
+    if (!process.env.API_URL) return
+    getStakes(process.env.API_URL, userMail).then(
+      (response) => {
+        // sum all hashes from assets
+        const allHashes = response.data.reduce((acc, asset) => acc + asset.hashRate, 0)
+        if (!process.env.DAILY_REWARDS) return
+        setMyMiningPower(parseInt(process.env.DAILY_REWARDS)*(allHashes/globalHash))
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+      }
+    )
+  } , [userMail])
 
   const buttonStyles = {
     width: 'fit-content',
@@ -147,7 +172,7 @@ const ReferralPage = () => {
                 </div>
 
                 <div className={styles.text}>
-                  MINING POWER: <span>{300} $MHT/day</span>
+                  MINING POWER: <span>{myMiningPower} $MHT/day</span>
                 </div>
               </div>
 
@@ -157,7 +182,7 @@ const ReferralPage = () => {
                 </div>
 
                 <div className={styles.text}>
-                  GLOBAL HASH RATE: <span>{300}</span>
+                  GLOBAL HASH RATE: <span>{globalHash}</span>
                 </div>
               </div>
             </div>

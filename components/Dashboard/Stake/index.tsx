@@ -12,48 +12,27 @@ import global from '@/public/assets/global.png'
 import soundicon from '@/public/assets/sound.svg'
 import muteicon from '@/public/assets/mute.svg'
 import addimage from '@/public/assets/stake/add.svg'
-import blankimage from '@/public/assets/stake/blank.svg'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import AudioPlayer from 'react-audio-player'
-
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
-
-import nft1 from '@/public/assets/stake/nfts/1.svg'
-import nft2 from '@/public/assets/stake/nfts/2.svg'
-import nft3 from '@/public/assets/stake/nfts/3.svg'
-import nft4 from '@/public/assets/stake/nfts/4.svg'
-import { getUserData } from '@/utils'
+import { getGlobalHash, getUserData, getStakes } from '@/utils'
 import { AssetsContext } from '@/contexts/AssetsProvider'
-
-const nftImages = [nft1, nft2, nft3, nft4]
 
 const StakePage = () => {
   const [popup, setPopup] = useState(false)
   const [audio, setAudio] = useState(false)
   const { publicKey, sendTransaction } = useWallet()
   const { wallet, setWallet, assets } = useContext(AssetsContext)
-  const numberOfImages = 16
+  const [ globalHash, setGlobalHash ] = useState(0)
+  const [ userMail, setUserMail ] = useState('')
+  const [ stakedAssets, setStakedAssets ] = useState([])
+  const [ airdropValue, setAirdropValue] = useState(0)
+  const [ myMiningPower, setMyMiningPower ] = useState(0)
 
-  const [airdropValue, setAirdropValue] = useState(0)
-
-  const getRandomRarity = () => {
-    const rarities = ['mythic', 'rare', 'common', 'uncommon', 'legendary', 'epic']
-    return rarities[Math.floor(Math.random() * rarities.length)]
-  }
-
-  const [stakeCards, setStakeCards] = useState(
-    Array.from({ length: numberOfImages }, (_, index) => ({
-      staked: true,
-      hashRate: Math.floor(Math.random() * 100),
-      id: index + 1,
-      rarity: getRandomRarity(),
-      nft: nftImages[Math.floor(Math.random() * nftImages.length)],
-    }))
-  )
 
   const handleUnstake = (id: number) => {
     // Remove o StakeCard com o ID correspondente
-    setStakeCards((prevStakeCards) => prevStakeCards.filter((card) => card.id !== id))
+    //setStakeCards((prevStakeCards) => prevStakeCards.filter((card) => card.id !== id))
   }
 
   useEffect(() => {
@@ -61,13 +40,40 @@ const StakePage = () => {
     getUserData(process.env.API_URL).then(
       (response) => {
         setAirdropValue(response.data.AirdropValue)
+        setUserMail(response.data.email)
       }
     ).catch(
       (error) => {
         console.log(error)
       }
     )
+    getGlobalHash(process.env.API_URL).then(
+      (response) => {
+        setGlobalHash(response.data)
+      }).catch(
+        (error) => {
+          console.log(error)
+        }
+      )
   }, [])
+
+  useEffect(() => {
+    if (!process.env.API_URL) return
+    getStakes(process.env.API_URL, userMail).then(
+      (response) => {
+        setStakedAssets(response.data)
+        console.log(assets)
+        // sum all hashes from assets
+        const allHashes = response.data.reduce((acc, asset) => acc + asset.hashRate, 0)
+        if (!process.env.DAILY_REWARDS) return
+        setMyMiningPower(parseInt(process.env.DAILY_REWARDS)*(allHashes/globalHash))
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+      }
+    )
+  } , [userMail])
 
   useEffect(() => {
     if (!publicKey) { return }
@@ -133,7 +139,7 @@ const StakePage = () => {
               </div>
 
               <div className={styles.text}>
-                MINING POWER: <span>{300} $MHT/day</span>
+                MINING POWER: <span>{myMiningPower} $MHT/day</span>
               </div>
             </div>
 
@@ -143,7 +149,7 @@ const StakePage = () => {
               </div>
 
               <div className={styles.text}>
-                GLOBAL HASH RATE: <span>{300}</span>
+                GLOBAL HASH RATE: <span>{globalHash}</span>
               </div>
             </div>
           </div>
@@ -158,9 +164,11 @@ const StakePage = () => {
           </div>
         </div>
         <div className={styles.gridContainer}>
-            {stakeCards.map((card) => (
-              <StakeCard key={card.id} {...card} onUnstake={() => handleUnstake(card.id)} setPopup={() => null} />
-            ))}
+            {stakedAssets.map((asset, index) => (
+              //@ts-ignore
+              <StakeCard index={index} key={index} id={asset.name} rarity={asset.rarity} staked={true} mint={asset.mintAddress} hashRate={process.env.DAILY_REWARDS*(asset.hashRate/globalHash)} onUnstake={null} nft={asset.image} setPopup={() => null} />
+            )
+            )}
             <div className={styles.gridItem}>
               <Image
                 onClick={() => setPopup(true)}

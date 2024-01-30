@@ -132,3 +132,107 @@ export const getReferralRanking = async (baseURL: string) => {
     const response = await axios(request)
     return response
 }
+
+export const getFactionPopulation = async (baseURL: string, faction: string ) => {
+
+        const auth = localStorage.getItem('userToken')
+        const data = JSON.stringify({ "faction": faction });
+    
+        const request: any = {
+            method: 'GET',
+            url: `${baseURL}/stake/get-faction-population/${faction}`,
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${auth}`
+            },
+            maxRedirects: 0,
+            data: data
+        }
+    
+        const response = await axios(request)
+        return response
+}
+
+export const getGlobalHash = async (baseURL: string) => {
+    
+        const auth = localStorage.getItem('userToken')
+    
+        const request: any = {
+            method: 'GET',
+            url: `${baseURL}/stake/global-hash`,
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${auth}`
+            },
+            maxRedirects: 0,
+            data: ''
+        }
+    
+        const response = await axios(request)
+        return response
+}
+
+export const stake = async (baseURL: string, name: string, faction: string, stakedBy: string, mintAddress: string, mail: string) => {
+        const auth = localStorage.getItem('userToken')
+        const data = JSON.stringify({ "name": name, "faction": faction, "stakedBy": stakedBy, "mintAddress": mintAddress, "mail": mail })
+    
+        const request: any = {
+            method: 'POST',
+            url: `${baseURL}/stake/stake`,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
+            },
+            maxRedirects: 0,
+            data: data
+        }
+    
+        const response = await axios(request)
+        return response
+}
+
+export const getStakes = async (baseURL: string, mail: string) => {
+
+        const auth = localStorage.getItem('userToken')
+    
+        const request: any = {
+            method: 'GET',
+            url: `${baseURL}/stake/get-user-stakes/${mail}`,
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${auth}`
+            },
+            maxRedirects: 0,
+            data: ''
+        }
+    
+        const response = await axios(request)
+        return response
+}
+
+export const unstake = async (baseURL: string, mail: string, mint: string) => {
+
+        const auth = localStorage.getItem('userToken')
+        const data = JSON.stringify({ "mail": mail, "mintAddress": mint })
+    
+        const request: any = {
+            method: 'POST',
+            url: `${baseURL}/stake/unstake`,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth}`
+            },
+            maxRedirects: 0,
+            data: data
+        }
+    
+        const response = await axios(request)
+        return response
+}
+
+
+
+
+

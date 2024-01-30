@@ -4,6 +4,7 @@ import StakePage from '@/components/Dashboard/Stake'
 
 import { Wallet } from '../contexts/SolanaWalletProvider'
 import AssetsProvider from '../contexts/AssetsProvider'/*  */
+import StakeContextProvider from '@/contexts/StakeContextProvider'
 
 export default function Stake() {
   return (
@@ -16,7 +17,9 @@ export default function Stake() {
       </Head>
       <Wallet>
         <AssetsProvider>
-          <StakePage />
+          <StakeContextProvider>
+            <StakePage />
+          </StakeContextProvider>
         </AssetsProvider>
       </Wallet>
     </>

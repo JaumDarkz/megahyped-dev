@@ -59,6 +59,18 @@
 
     transition: 0.3s;
 
+    &.loading {
+      cursor: not-allowed;
+      background-color: #6f8f07;
+
+      &:before {
+        content: '\231B'; // Unicode character
+        display: inline-block;
+        margin-right: 5px;
+        animation: spin 1s infinite linear;
+      }
+    }
+
     &:hover {
       filter: brightness(0.7);
     }
@@ -66,6 +78,16 @@
     &:active {
       box-shadow: 4px 4px 0px 0px #000 inset;
       background: #6f8f07;
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
     }
   }
 }

@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 
 interface Props {
-  id: number
+  id: string
   hashRate: number
   rarity: string
 }
@@ -31,8 +31,8 @@ const Badge = ({ rarity, id, hashRate }: Props) => {
   return (
     <div className={styles.container}>
       <div className={getRarityClassName()}>{formattedRarity.toUpperCase()}</div>
-      <div className={styles.idContainer}>Vandal#{id}</div>
-      <div className={styles.hashRateContainer}>Hash Rate: {hashRate} $MHT/Day</div>
+      <div className={styles.idContainer}>{id}</div>
+      <div className={styles.hashRateContainer}>{hashRate.toFixed(2)} $MHT/Day</div>
     </div>
   )
 }
